@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Art of Craft — Amélie Faurent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:#ffffff;
+  color:#111111;
+  font-family:'Jost',sans-serif;
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+}
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 48px;
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(8px);
+  border-bottom:0.5px solid rgba(0,0,0,0.07);
+}
+.nav-logo{
+  font-family:'Jost',sans-serif;font-weight:200;
+  font-size:0.76rem;letter-spacing:0.24em;text-transform:uppercase;
+  color:#111;text-decoration:none;
+}
+.nav-links{display:flex;gap:28px}
+.nav-links a{
+  font-family:'Jost',sans-serif;font-weight:300;
+  font-size:0.7rem;letter-spacing:0.1em;text-transform:lowercase;
+  color:#111;text-decoration:none;
+  transition:opacity .2s;
+}
+.nav-links a:hover{opacity:.35}
+.nav-year{
+  font-size:0.68rem;letter-spacing:0.14em;
+  color:#ccc;font-weight:200;
+}
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:120px 48px 80px;
+}
+.hero-tag{
+  font-size:0.68rem;letter-spacing:0.26em;text-transform:uppercase;
+  color:#bbb;font-weight:200;
+  margin-bottom:52px;
+}
+.cover-wrap{
+  width:240px;margin:0 auto 56px;
+  position:relative;
+}
+.cover-wrap svg{
+  width:100%;
+  filter:drop-shadow(0 20px 44px rgba(110,31,42,.18)) drop-shadow(0 4px 10px rgba(0,0,0,.1));
+  transition:filter .4s;
+}
+.cover-wrap:hover svg{
+  filter:drop-shadow(0 28px 56px rgba(110,31,42,.26)) drop-shadow(0 6px 16px rgba(0,0,0,.14));
+}
+.hero-h{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.2rem,8vw,6.5rem);
+  font-weight:300;line-height:.95;
+  letter-spacing:.01em;
+  text-align:center;color:#111;
+  margin-bottom:20px;
+}
+.hero-h em{font-style:italic;color:#6e1f2a}
+.hero-sub{
+  font-size:0.74rem;letter-spacing:0.22em;text-transform:uppercase;
+  color:#bbb;font-weight:200;
+  text-align:center;margin-bottom:60px;
+}
+.cta{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:0.7rem;letter-spacing:0.18em;text-transform:lowercase;
+  color:#111;text-decoration:none;
+  border-bottom:0.5px solid rgba(0,0,0,.3);
+  padding-bottom:3px;
+  transition:opacity .2s;
+}
+.cta:hover{opacity:.35}
+.section{padding:120px 48px}
+.s-top{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin-bottom:72px;
+  border-bottom:0.5px solid #ebebeb;
+  padding-bottom:24px;
+}
+.s-tag{
+  font-size:0.66rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:#ccc;font-weight:200;
+}
+.s-heading{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.6rem,3vw,2.6rem);
+  font-weight:300;font-style:italic;color:#111;
+}
+.fan-scene{
+  position:relative;
+  width:100%;height:440px;
+  display:flex;align-items:center;justify-content:center;
+  perspective:1400px;
+}
+.p-card{
+  position:absolute;
+  width:174px;height:248px;
+  cursor:pointer;
+  transform-style:preserve-3d;
+  transition:transform .55s cubic-bezier(.23,1,.32,1),box-shadow .55s;
+}
+.c-front,.c-back{
+  position:absolute;inset:0;
+  backface-visibility:hidden;
+  border-radius:1px;
+  overflow:hidden;
+}
+.c-back{
+  transform:rotateY(180deg);
+  background:#fff;
+  border:0.5px solid #e8e5e0;
+  display:flex;flex-direction:column;
+  align-items:flex-start;justify-content:flex-end;
+  padding:22px 18px;
+}
+.c-back-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.6rem;font-weight:300;
+  color:#e8e0d6;line-height:1;
+  margin-bottom:10px;
+}
+.c-back-t{
+  font-family:'Cormorant Garamond',serif;
+  font-size:.92rem;font-weight:400;font-style:italic;
+  color:#111;line-height:1.3;
+  margin-bottom:7px;
+}
+.c-back-d{
+  font-size:.66rem;letter-spacing:.05em;
+  color:#aaa;font-weight:300;line-height:1.65;
+}
+.fan-hint{
+  text-align:center;margin-top:36px;
+  font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;
+  color:#d0d0d0;font-weight:200;
+}
+.about-grid{
+  display:grid;grid-template-columns:280px 1fr;gap:80px;
+  align-items:start;
+  border-top:0.5px solid #ebebeb;
+}
+.about-left .s-tag{display:block;margin-bottom:20px}
+.about-h{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.8rem,3.5vw,2.8rem);
+  font-weight:300;line-height:1.1;color:#111;
+}
+.about-h em{font-style:italic;color:#6e1f2a}
+.about-body p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.14rem;font-weight:400;line-height:1.9;
+  color:#2e2e2e;margin-bottom:22px;
+}
+.about-body p:last-of-type{margin-bottom:0}
+.about-sig{
+  display:block;margin-top:32px;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:.95rem;
+  color:#6e1f2a;
+}
+.dl-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;
+  align-items:center;
+  border-top:0.5px solid #ebebeb;
+}
+.dl-tag{
+  font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;
+  color:#ccc;font-weight:200;margin-bottom:18px;
+}
+.dl-h{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,5vw,4.2rem);
+  font-weight:300;line-height:1;color:#111;
+}
+.dl-h em{font-style:italic;color:#6e1f2a}
+.dl-right{
+  display:flex;flex-direction:column;
+  align-items:flex-start;gap:28px;
+}
+.dl-meta{
+  font-size:.72rem;letter-spacing:.1em;
+  color:#bbb;font-weight:200;line-height:1.9;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:12px;
+  padding:15px 36px;
+  background:#111;color:#fff;
+  text-decoration:none;
+  font-family:'Jost',sans-serif;font-weight:300;
+  font-size:.72rem;letter-spacing:.18em;text-transform:lowercase;
+  border:0.5px solid #111;
+  transition:background .25s,color .25s;
+}
+.btn:hover{background:#fff;color:#111}
+.btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+footer{
+  border-top:0.5px solid #ebebeb;
+  padding:26px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.ft{
+  font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+  color:#ccc;font-weight:200;
+}
+@media(max-width:720px){
+  nav{padding:18px 22px}
+  .nav-links{gap:16px}
+  .nav-year{display:none}
+  .section{padding:80px 22px}
+  .about-grid{grid-template-columns:1fr;gap:36px}
+  .dl-grid{grid-template-columns:1fr;gap:36px}
+  .fan-scene{height:360px}
+  .p-card{width:140px;height:200px}
+  footer{padding:22px;flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">amélie faurent</a>
+  <div class="nav-links">
+    <a href="#extraits">[ extraits ]</a>
+    <a href="#about">[ à propos ]</a>
+    <a href="#download">[ télécharger ]</a>
+  </div>
+  <span class="nav-year">esp · 2025</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-tag">[ livre blanc · projet de fin d'études · esp ]</p>
+
+  <div class="cover-wrap">
+    <svg viewBox="0 0 240 340" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="g0">
+          <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch" result="n"/>
+          <feColorMatrix type="saturate" values="0" in="n" result="gn"/>
+          <feBlend in="SourceGraphic" in2="gn" mode="overlay"/>
+        </filter>
+      </defs>
+      <rect width="240" height="340" fill="#6e1f2a"/>
+      <rect width="240" height="340" fill="rgba(245,240,232,.04)" filter="url(#g0)"/>
+      <rect x="11" y="11" width="218" height="318" fill="none" stroke="rgba(245,240,232,.16)" stroke-width=".6"/>
+      <circle cx="120" cy="144" r="66" fill="none" stroke="rgba(245,240,232,.1)" stroke-width=".6"/>
+      <circle cx="120" cy="144" r="44" fill="none" stroke="rgba(245,240,232,.07)" stroke-width=".5"/>
+      <g transform="translate(72,113)">
+        <rect x="0" y="0" width="34" height="50" rx="1" fill="rgba(245,240,232,.09)" stroke="rgba(245,240,232,.22)" stroke-width=".5"/>
+        <rect x="42" y="0" width="34" height="50" rx="1" fill="rgba(245,240,232,.13)" stroke="rgba(245,240,232,.22)" stroke-width=".5"/>
+        <rect x="33" y="-3" width="9" height="56" rx=".5" fill="rgba(245,240,232,.18)"/>
+        <line x1="5" y1="16" x2="29" y2="16" stroke="rgba(245,240,232,.2)" stroke-width=".7"/>
+        <line x1="5" y1="22" x2="29" y2="22" stroke="rgba(245,240,232,.15)" stroke-width=".5"/>
+        <line x1="5" y1="28" x2="22" y2="28" stroke="rgba(245,240,232,.15)" stroke-width=".5"/>
+        <line x1="47" y1="16" x2="71" y2="16" stroke="rgba(245,240,232,.2)" stroke-width=".7"/>
+        <line x1="47" y1="22" x2="71" y2="22" stroke="rgba(245,240,232,.15)" stroke-width=".5"/>
+        <line x1="47" y1="28" x2="64" y2="28" stroke="rgba(245,240,232,.15)" stroke-width=".5"/>
+      </g>
+      <text x="120" y="260" text-anchor="middle" font-family="Georgia,serif" font-size="9.5" letter-spacing="5.5" fill="rgba(245,240,232,.85)">THE ART</text>
+      <text x="120" y="275" text-anchor="middle" font-family="Georgia,serif" font-size="9.5" letter-spacing="5.5" fill="rgba(245,240,232,.85)">OF CRAFT</text>
+      <line x1="64" y1="285" x2="176" y2="285" stroke="rgba(245,240,232,.18)" stroke-width=".5"/>
+      <text x="120" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="6" letter-spacing="3.5" fill="rgba(245,240,232,.42)">AMÉLIE FAURENT</text>
+    </svg>
+  </div>
+
+  <h1 class="hero-h">The Art of <em>Craft</em></h1>
+  <p class="hero-sub">identité visuelle &amp; essence de marque</p>
+  <a class="cta" href="#extraits">découvrir →</a>
+</section>
+
+<!-- EXTRAITS -->
+<section class="section" id="extraits">
+  <div class="s-top">
+    <span class="s-tag">[ extraits ]</span>
+    <span class="s-heading">Feuilletez le livre</span>
+  </div>
+  <div class="fan-scene" id="fan"></div>
+  <p class="fan-hint">[ survolez chaque page pour la retourner ]</p>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="about-grid">
+    <div class="about-left">
+      <span class="s-tag">[ à propos ]</span>
+      <h2 class="about-h">À propos<br>de ce <em>projet</em></h2>
+    </div>
+    <div class="about-body">
+      <p>Je suis passionnée par la photographie, l'art, la mode et le design — mais surtout par les histoires qui se cachent derrière chaque création. Ce qui m'anime, c'est l'émotion que porte un processus créatif bien mené, et la façon dont une image, une couleur ou une typographie peut dire ce que les mots ne suffisent pas à exprimer.</p>
+      <p>Mon parcours a débuté en communication, par envie de comprendre les mécanismes stratégiques qui se jouent derrière les marques et leurs prises de parole. Avec le temps, j'ai appris à trouver ma place là où la stratégie rencontre la créativité.</p>
+      <p>C'est dans cet esprit que j'ai conçu ce livre blanc, réalisé dans le cadre de mon projet de fin d'études à l'ESP. Loin de la posture de l'experte, c'est avant tout un travail d'exploration et de transmission — une invitation à plonger dans les coulisses de la création visuelle, et à comprendre comment une identité visuelle peut révéler l'essence même d'une marque.</p>
+      <span class="about-sig">Bienvenue dans l'univers de The Art of Craft.</span>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section class="section" id="download">
+  <div class="dl-grid">
+    <div class="dl-left">
+      <p class="dl-tag">[ téléchargement gratuit ]</p>
+      <h2 class="dl-h">Lire <em>The Art<br>of Craft</em></h2>
+    </div>
+    <div class="dl-right">
+      <p class="dl-meta">
+        Livre blanc complet<br>
+        Projet de fin d'études · ESP · 2025<br>
+        Identité visuelle &amp; essence de marque
+      </p>
+      <a class="btn" href="https://drive.google.com/uc?export=download&id=15kqhtkOdtP26ao2k1i5gs029-mAbO-TO" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 15l-4-4h3V4h2v7h3l-4 4z"/><path d="M20 18H4v2h16v-2z"/></svg>
+        télécharger le pdf
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="ft">amélie faurent</span>
+  <span class="ft">the art of craft · esp · 2025</span>
+</footer>
+
+<script>
+const pages=[
+  {bg:'#6e1f2a',lt:true, num:'01',title:'Introduction',       desc:'Enjeux et définitions de l\'identité visuelle.'},
+  {bg:'#4a5a9a',lt:true, num:'02',title:'La marque & son essence', desc:'Comment une marque se construit au-delà du logo.'},
+  {bg:'#f5f0e8',lt:false,num:'03',title:'Le processus créatif',desc:'Les étapes d\'une création visuelle cohérente.'},
+  {bg:'#7a8c5c',lt:true, num:'04',title:'Études de cas',      desc:'Décryptage de marques iconiques à travers leur DA.'},
+  {bg:'#1a1715',lt:true, num:'05',title:'L\'œil du créatif',  desc:'Retour d\'expérience et vision personnelle.'},
+];
+const poses=[
+  {a:-28,x:-300,y:-8, sh:.10,z:1},
+  {a:-14,x:-152,y:-38,sh:.12,z:2},
+  {a:0,  x:0,   y:-48,sh:.14,z:3},
+  {a:14, x:152, y:-38,sh:.12,z:2},
+  {a:28, x:300, y:-8, sh:.10,z:1},
+];
+const fan=document.getElementById('fan');
+pages.forEach((p,i)=>{
+  const pos=poses[i];
+  const base=`translateX(${pos.x}px) translateY(${pos.y}px) rotate(${pos.a}deg)`;
+  const card=document.createElement('div');
+  card.className='p-card';
+  card.style.cssText=`transform:${base};z-index:${pos.z};box-shadow:0 ${8+pos.z*4}px ${20+pos.z*10}px rgba(0,0,0,${pos.sh})`;
+
+  const tc=p.lt?'rgba(245,240,232,':'rgba(110,31,42,';
+  const front=document.createElement('div');
+  front.className='c-front';
+  front.innerHTML=`<svg viewBox="0 0 174 248" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
+    <defs><filter id="gf${i}"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch" result="n"/><feColorMatrix type="saturate" values="0" in="n"/><feBlend in="SourceGraphic" mode="overlay"/></filter></defs>
+    <rect width="174" height="248" fill="${p.bg}"/>
+    <rect width="174" height="248" fill="rgba(255,255,255,.03)" filter="url(#gf${i})"/>
+    <rect x="8" y="8" width="158" height="232" fill="none" stroke="${tc}.18)" stroke-width=".5"/>
+    <text x="87" y="26" text-anchor="middle" font-family="Georgia,serif" font-size="6" letter-spacing="3" fill="${tc}.5)">THE ART OF CRAFT</text>
+    <line x1="28" y1="32" x2="146" y2="32" stroke="${tc}.12)" stroke-width=".4"/>
+    <circle cx="87" cy="114" r="40" fill="none" stroke="${tc}.1)" stroke-width=".5"/>
+    <text x="87" y="126" text-anchor="middle" font-family="Georgia,serif" font-size="34" font-style="italic" fill="${tc}.13)">${p.num}</text>
+    <text x="87" y="200" text-anchor="middle" font-family="Georgia,serif" font-size="8.5" fill="${tc}.78)">${p.title.replace('&','&amp;')}</text>
+    <line x1="38" y1="210" x2="136" y2="210" stroke="${tc}.1)" stroke-width=".4"/>
+  </svg>`;
+
+  const back=document.createElement('div');
+  back.className='c-back';
+  back.innerHTML=`<div class="c-back-n">${p.num}</div><div class="c-back-t">${p.title}</div><div class="c-back-d">${p.desc}</div>`;
+
+  card.appendChild(front);
+  card.appendChild(back);
+  fan.appendChild(card);
+
+  card.addEventListener('mouseenter',()=>{
+    card.style.transform=`${base} rotateY(180deg)`;
+    card.style.zIndex=20;
+    card.style.boxShadow=`0 28px 60px rgba(0,0,0,.2)`;
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform=base;
+    card.style.zIndex=pos.z;
+    card.style.boxShadow=`0 ${8+pos.z*4}px ${20+pos.z*10}px rgba(0,0,0,${pos.sh})`;
+  });
+});
+</script>
+</body>
+</html>
